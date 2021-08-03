@@ -105,7 +105,7 @@ const App = ({ initialWord = ['H', 'E', 'L', 'L', 'O']}) => {
 	 * @returns {array} keys
 	 */
 	function resetKeys() {
-		const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXY'.split('');
+		const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 		return alphabet.reduce((acc, l) => {
 			acc.push({

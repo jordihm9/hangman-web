@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Keyboard from './../components/Keyboard';
 
 describe('<Keyboard />', () => {
-	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXY'.split('');
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let keys;
 
 	beforeEach(() => {
