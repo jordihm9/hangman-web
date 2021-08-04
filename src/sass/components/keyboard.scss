@@ -1,0 +1,42 @@
+@use './../abstracts/' as *;
+
+.keyboard {
+	margin: 2.5rem auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	max-width: 40rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.key {
+	position: relative;
+	padding: 0 .25em;
+	font-size: 2.5rem;
+	cursor: pointer;
+
+	&:not(.used):hover {
+		filter: brightness(1.5);
+	}
+
+	&.used {
+		color: rgba($clr-white, 0.5);
+		cursor: not-allowed;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 50%;
+			width: .1em;
+			transform: translateX(-50%) rotate(45deg);
+			background: $clr-red;
+		}
+
+		&.in_word:after {
+			background: $clr-light-green !important;
+		}
+	}
+}

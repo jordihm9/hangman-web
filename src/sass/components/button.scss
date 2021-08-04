@@ -1,0 +1,15 @@
+@use './../abstracts/' as *;
+
+button {
+	display: block;
+	margin: auto;
+	padding: .5em 1.15em;
+	color: $clr-white;
+	background: linear-gradient(265.53deg, rgba($clr-purple, .5) -0.79%, rgba($clr-bright-purple, 0.5) 96.93%);
+	cursor: pointer;
+	transition: background 250ms ease;
+	
+	&:hover {
+		background: linear-gradient(265.53deg, rgba($clr-purple, .75) -0.79%, rgba($clr-bright-purple, 0.75) 96.93%);
+	}
+}

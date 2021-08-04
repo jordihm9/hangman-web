@@ -1,0 +1,33 @@
+@use './../abstracts/' as *;
+
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	color: $clr-white;
+	background: linear-gradient(180deg, #2B0C52 0%, #7C7484 100%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height: 100%;
+}
+
+button,
+button:focus,
+button:hover {
+	outline: none;
+	border: none;
+}
+
+.title {
+	margin-top: 5rem;
+	letter-spacing: .25em;
+}
+
+.text-center {
+	text-align: center;
+}

@@ -1,0 +1,30 @@
+@use './../abstracts/' as *;
+
+.guess {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.letter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	padding: .05em .15em;
+	margin: 0 .1em;
+	width: 1em;
+	height: 1em;
+	font-size: 3rem;
+
+	&:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		bottom: -.1em;
+		left: 0;
+		height: .1em;
+		background: $clr-white;
+	}
+}

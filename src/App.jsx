@@ -120,7 +120,9 @@ const App = ({ initialWord = ['H', 'E', 'L', 'L', 'O']}) => {
 
 	return (
 		<Fragment>
-			<h1>Hangman</h1>
+			<div className="title text-center">
+				<h1>Hangman</h1>
+			</div>
 			<Hangman failures={failures}/>
 			<Guess guess={guess} />
 			<Keyboard keys={keys} guessLetter={guessLetter} />

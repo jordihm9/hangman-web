@@ -16,4 +16,9 @@ Launch the test runner in the interactive watch mode.
 npm test
 ```
 
+Launch the sass compiler in watch mode.
+```
+npm run sass
+```
+
  > This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

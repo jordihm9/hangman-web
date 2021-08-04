@@ -1,0 +1,28 @@
+@use './../abstracts/' as *;
+
+* {
+	font-family: 'Londrina Solid', cursive;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: 5rem;
+}
+
+button {
+	text-transform: uppercase;
+	font-size: 1.5rem;
+	letter-spacing: .2em;
+}
+
+a,
+a:visited,
+a:active {
+	color: inherit;
+	text-decoration: none;
+}
