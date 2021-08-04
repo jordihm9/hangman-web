@@ -8,8 +8,7 @@ describe('<Button />', ()=> {
 	test('should render', () => {
 		render(<Button>I am a button!</Button>);
 
-		screen.getByRole('button');
-		screen.getByText('I am a button!');
+		screen.getByRole('button', { 'name': 'I am a button!' });
 	});
 
 	test('should run the function passed by props when click is fired', () => {

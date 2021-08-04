@@ -7,7 +7,7 @@ describe('<App />', () => {
 	beforeEach(() => render(<App initialWord={'HELLO'.split('')} />));
 
 	test('should render', () => {
-		screen.getByText('Hangman');
+		screen.getByRole('heading', { 'title': /hangman/i });
 	});
 
 	test('check if the word contains a letter and render the guess with the letter if the word includes it', () => {
