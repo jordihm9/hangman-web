@@ -1,7 +1,113 @@
 @use './../abstracts/' as *;
 
 #hangman {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 1rem;
+	margin: 2rem auto;
+	position: relative;
+	width: 200px;
+	height: 200px;
+}
+
+.hangman {
+	$thickness: .75rem;
+	$rope-height: .75rem;
+	$head-diameter: 2rem;
+	$body-height: 4.25rem;
+	$arm-width: 1.5rem;
+	$leg-height: 2rem;
+
+	position: absolute;
+	// to make the shape half transparent
+	background: rgba($clr-white, .2);
+
+	&.show {
+		background: $clr-white;
+	}
+	
+	&.base {
+		bottom: 0;
+		left: 1rem;
+		width: 5rem;
+		height: $thickness;
+	}
+
+	&.stick {
+		top: $thickness;
+		bottom: $thickness;
+		left: 3rem;
+		width: $thickness;
+	}
+
+	&.top {
+		top: 0;
+		left: 1.5rem;
+		width: 8.5rem;
+		height: $thickness;
+	}
+
+	&.man {
+		top: $thickness;
+		left: 7.5rem;
+	}
+
+	&.rope {
+		top: 0;
+		width: $thickness;
+		height: $rope-height;
+	}
+
+	&.head {
+		top: $rope-height - .05rem;
+		left: -($head-diameter / 2) + ($thickness / 2);
+		width: $head-diameter;
+		height: $head-diameter;
+		border-radius: 50%;
+	}
+
+	&.body {
+		top: $rope-height + $head-diameter - .1rem;
+		width: $thickness;
+		height: $body-height;
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: -$thickness;
+			border-top: $thickness solid rgba($clr-white, .2);
+			border-right: $thickness /2 solid transparent;
+			border-left: $thickness /2 solid transparent;
+			border-bottom: none;
+		}
+
+		&.show:after {
+			border-top-color: $clr-white;
+		}
+	}
+
+	&.arm {
+		top: $rope-height + $head-diameter + ($body-height / 4);
+		height: $thickness;
+		width: $arm-width;
+
+		&.right {
+			left: $thickness;
+		}
+	
+		&.left {
+			left: -$thickness * 2;
+		}
+	}
+
+	&.leg {
+		top: $rope-height + $head-diameter + $body-height - 1rem;
+		width: $thickness;
+		height: $leg-height;
+		
+		&.right {
+			transform: translate(1.05rem, .75rem) rotate(-60deg);
+		}
+	
+		&.left {
+			transform: translate(-1.05rem, .75rem) rotate(60deg);
+		}
+	}	
 }

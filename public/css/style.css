@@ -73,9 +73,107 @@ button:hover {
 }
 
 #hangman {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
+  margin: 2rem auto;
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.hangman {
+  position: absolute;
+  background: rgba(221, 234, 242, 0.2);
+}
+
+.hangman.show {
+  background: #DDEAF2;
+}
+
+.hangman.base {
+  bottom: 0;
+  left: 1rem;
+  width: 5rem;
+  height: 0.75rem;
+}
+
+.hangman.stick {
+  top: 0.75rem;
+  bottom: 0.75rem;
+  left: 3rem;
+  width: 0.75rem;
+}
+
+.hangman.top {
+  top: 0;
+  left: 1.5rem;
+  width: 8.5rem;
+  height: 0.75rem;
+}
+
+.hangman.man {
+  top: 0.75rem;
+  left: 7.5rem;
+}
+
+.hangman.rope {
+  top: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.hangman.head {
+  top: 0.7rem;
+  left: -0.625rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.hangman.body {
+  top: 2.65rem;
+  width: 0.75rem;
+  height: 4.25rem;
+}
+
+.hangman.body:after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  border-top: 0.75rem solid rgba(221, 234, 242, 0.2);
+  border-right: 0.375rem solid transparent;
+  border-left: 0.375rem solid transparent;
+  border-bottom: none;
+}
+
+.hangman.body.show:after {
+  border-top-color: #DDEAF2;
+}
+
+.hangman.arm {
+  top: 3.8125rem;
+  height: 0.75rem;
+  width: 1.5rem;
+}
+
+.hangman.arm.right {
+  left: 0.75rem;
+}
+
+.hangman.arm.left {
+  left: -1.5rem;
+}
+
+.hangman.leg {
+  top: 6rem;
+  width: 0.75rem;
+  height: 2rem;
+}
+
+.hangman.leg.right {
+  transform: translate(1.05rem, 0.75rem) rotate(-60deg);
+}
+
+.hangman.leg.left {
+  transform: translate(-1.05rem, 0.75rem) rotate(60deg);
 }
 
 .guess {
