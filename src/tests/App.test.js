@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import App from './../App';
 
@@ -8,16 +8,6 @@ describe('<App />', () => {
 
 	test('should render', () => {
 		screen.getByRole('heading', { 'title': /hangman/i });
-	});
-
-	test('check if the word contains a letter and render the guess with the letter if the word includes it', () => {
-		const wordContainer = document.querySelector('.guess');
-
-		fireEvent.click(screen.getByText('A'));
-		expect(within(wordContainer).queryAllByText('A')).toHaveLength(0);
-
-		fireEvent.click(screen.getByText('L'));
-		expect(within(wordContainer).queryAllByText('L')).toHaveLength(2);
 	});
 
 	// ToDo

@@ -5,22 +5,28 @@ import Hangman from './components/Hangman';
 import Keyboard from './components/Keyboard';
 import Guess from './components/Guess';
 
-const App = ({ initialWord = ['H', 'E', 'L', 'L', 'O']}) => {
-	const [ word, setWord ] = useState(initialWord);
-	const [ guess, setGuess ] = useState([...word].fill(''));
+const App = () => {
+	const [ word, setWord ] = useState(null);
+	const [ guess, setGuess ] = useState(null);
 	const [ failures, setFailures ] = useState(0); // max 10
 	const [ keys, setKeys ] = useState(() => resetKeys());
-	const [ state, setState ] = useState('PLAYING'); // enum: PLAYING, GUESSED, HANGED
+	// enum: FETCHING_WORD, PLAYING, GUESSED, HANGED
+	const [ state, setState ] = useState('FETCHING_WORD');
 
 	useEffect(() => {
-		setGuess([...word].fill('')); // make a copy of word filling with empty strings
-	}, [ word ]);
+		const newWord = fetchNewWord();
+		setWord(newWord);
+		setGuess([...newWord].fill(''));
+		setState('PLAYING');
+	}, []); // same as componentDidMount from class components
 
 	useEffect(() => {
-		if (guess.join('') === word.join('')) {
-			setState('GUESSED');
+		if (word && guess) {
+			if (guess.join('') === word.join('')) {
+				setState('GUESSED');
+			}
 		}
-	}, [ guess, word ]);
+	}, [ guess ]); // eslint-disable-line
 
 	useEffect(() => {
 		if (failures >= 10) {
@@ -43,13 +49,14 @@ const App = ({ initialWord = ['H', 'E', 'L', 'L', 'O']}) => {
 
 	/**
 	 * ToDo
-	 * Request using axios to https://random-word-api.heroku.com/word via **GET**
-	 * Get the word returned and store it in uppercase as array in the word state using setWord()
+	 * Send a request to https://random-word-api.heroku.com/word via **GET**
 	 * API: https://random-word-api.heroku.com/word
 	 * headers: content-type = 'application/json'
+	 * @return {array} new word with all the letters separed and in uppercase
 	 */
 	function fetchNewWord() {
-		setWord('HELLO'.split(''));
+		setState('FETCHING_WORD')
+		return 'HANGMAN'.split('');
 	}
 
 	/**
@@ -123,10 +130,15 @@ const App = ({ initialWord = ['H', 'E', 'L', 'L', 'O']}) => {
 			<div className="title text-center">
 				<h1>Hangman</h1>
 			</div>
-			<Hangman failures={failures}/>
-			<Guess guess={guess} />
+			{ word ?
+					<Fragment>
+						<Hangman failures={failures}/>
+						<Guess guess={guess} />
+					</Fragment>
+				: null
+			}
 			<Keyboard keys={keys} guessLetter={guessLetter} />
-			<Button action={reset}>Reset</Button>
+			{ word ? <Button action={reset}>Reset</Button> : null }
 		</Fragment>
 	);
 }
