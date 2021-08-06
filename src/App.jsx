@@ -1,5 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
+import getRandomWord from './services/getRandomWord';
+
 import Button from './components/Button';
 import Hangman from './components/Hangman';
 import Keyboard from './components/Keyboard';
@@ -10,16 +12,20 @@ const App = () => {
 	const [ guess, setGuess ] = useState(null);
 	const [ failures, setFailures ] = useState(0); // max 10
 	const [ keys, setKeys ] = useState(() => resetKeys());
-	// enum: FETCHING_WORD, PLAYING, GUESSED, HANGED
-	const [ state, setState ] = useState('FETCHING_WORD');
+	// enum: LOADING, PLAYING, GUESSED, HANGED
+	const [ state, setState ] = useState('LOADING');
 
 	useEffect(() => {
-		const newWord = fetchNewWord();
-		setWord(newWord);
-		setGuess([...newWord].fill(''));
-		setState('PLAYING');
+		newWord();
 	}, []); // same as componentDidMount from class components
 
+	useEffect(() => {
+		if (word) {
+			setGuess([...word].fill(''));
+			setState('PLAYING');
+		}
+	}, [ word ]);
+	
 	useEffect(() => {
 		if (word && guess) {
 			if (guess.join('') === word.join('')) {
@@ -37,27 +43,15 @@ const App = () => {
 	useEffect(() => {
 		switch (state) {
 			case 'HANGED':
-				console.log('hanged!');
+				alert('hanged!');
 				break;
 			case 'GUESSED':
-				console.log('guessed!');
+				alert('guessed!');
 				break;
 			default:
 				return;
 		}
 	}, [ state ]);
-
-	/**
-	 * ToDo
-	 * Send a request to https://random-word-api.heroku.com/word via **GET**
-	 * API: https://random-word-api.heroku.com/word
-	 * headers: content-type = 'application/json'
-	 * @return {array} new word with all the letters separed and in uppercase
-	 */
-	function fetchNewWord() {
-		setState('FETCHING_WORD')
-		return 'HANGMAN'.split('');
-	}
 
 	/**
 	 * Updates the keys list setting it has been used
@@ -101,10 +95,9 @@ const App = () => {
 	 * Resets the failures to 0, fetches a new word and reset the keys
 	 */
 	function reset() {
+		newWord();
 		setFailures(0);
-		fetchNewWord();
 		setKeys(resetKeys());
-		setState('PLAYING');
 	}
 	
 	/**
@@ -125,20 +118,38 @@ const App = () => {
 		}, []);
 	}
 
+	function newWord() {
+		setState('LOADING');
+
+		getRandomWord()
+			.then(newWord => {
+				setWord(newWord);
+			});
+	}
+
 	return (
 		<Fragment>
 			<div className="title text-center">
 				<h1>Hangman</h1>
 			</div>
-			{ word ?
+			{ word && guess ?
 					<Fragment>
 						<Hangman failures={failures}/>
 						<Guess guess={guess} />
+						<Keyboard keys={keys} guessLetter={guessLetter} />
+						<Button action={reset}>Reset</Button>
 					</Fragment>
+				: state === 'LOADING' ?
+					<h2>LOADING</h2>
 				: null
 			}
-			<Keyboard keys={keys} guessLetter={guessLetter} />
-			{ word ? <Button action={reset}>Reset</Button> : null }
+			{
+				state === 'GUESSED' ?
+					<h2>GUESSED</h2>
+					: state === 'HANGED' ?
+					<h2>HANGED</h2>
+					: null
+			}
 		</Fragment>
 	);
 }

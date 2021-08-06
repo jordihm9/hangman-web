@@ -7,7 +7,7 @@ describe('<App />', () => {
 	beforeEach(() => render(<App initialWord={'HELLO'.split('')} />));
 
 	test('should render', () => {
-		screen.getByRole('heading', { 'title': /hangman/i });
+		screen.getByRole('heading', { 'level': 1 });
 	});
 
 	// ToDo
