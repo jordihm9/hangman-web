@@ -8,6 +8,7 @@
 }
 
 body {
+  margin-bottom: 10vh;
   color: #DDEAF2;
   background: linear-gradient(180deg, #2B0C52 0%, #7C7484 100%);
   background-repeat: no-repeat;
@@ -23,10 +24,15 @@ button:hover {
 }
 
 .title {
-  margin-top: 5rem;
+  margin: 5rem 0;
   letter-spacing: 0.25em;
 }
 
+@media (max-width: 39.9375em) {
+  .title {
+    margin: 3.5vh 0 1rem 0;
+  }
+}
 .text-center {
   text-align: center;
 }
@@ -45,6 +51,11 @@ h1 {
   font-size: 5rem;
 }
 
+@media (max-width: 39.9375em) {
+  h1 {
+    font-size: 3.75rem;
+  }
+}
 button {
   text-transform: uppercase;
   font-size: 1.5rem;
@@ -73,10 +84,10 @@ button:hover {
 }
 
 #hangman {
-  margin: 2rem auto;
+  margin: 0 auto;
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 12rem;
+  height: 12rem;
 }
 
 .hangman {
@@ -179,8 +190,10 @@ button:hover {
 .guess {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding: 0 0.75em;
 }
 
 .letter {
@@ -188,10 +201,9 @@ button:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0.05em 0.15em;
-  margin: 0 0.1em;
+  margin: 0.1em;
   width: 1em;
-  height: 1em;
+  height: 1.2em;
   font-size: 3rem;
 }
 
@@ -199,7 +211,7 @@ button:hover {
   content: "";
   position: absolute;
   right: 0;
-  bottom: -0.1em;
+  bottom: 0;
   left: 0;
   height: 0.1em;
   background: #DDEAF2;
@@ -207,6 +219,7 @@ button:hover {
 
 .keyboard {
   margin: 2.5rem auto;
+  padding: 0 1.25em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -279,6 +292,12 @@ button:hover {
 .popup > .content > .word {
   font-size: 2rem;
   color: #7C7484;
+}
+
+@media (max-width: 39.9375em) {
+  .popup {
+    width: 90%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

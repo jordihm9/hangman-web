@@ -1,10 +1,10 @@
 @use './../abstracts/' as *;
 
 #hangman {
-	margin: 2rem auto;
+	margin: 0 auto;
 	position: relative;
-	width: 200px;
-	height: 200px;
+	width: 12rem;
+	height: 12rem;
 }
 
 .hangman {
@@ -73,8 +73,8 @@
 			position: absolute;
 			bottom: -$thickness;
 			border-top: $thickness solid rgba($clr-white, .2);
-			border-right: $thickness /2 solid transparent;
-			border-left: $thickness /2 solid transparent;
+			border-right: $thickness / 2 solid transparent;
+			border-left: $thickness / 2 solid transparent;
 			border-bottom: none;
 		}
 

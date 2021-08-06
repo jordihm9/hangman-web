@@ -33,4 +33,8 @@
 			color: $clr-purple-light;
 		}
 	}
+
+	@include breakpoint-down('small') {
+		width: 90%;
+	}
 }

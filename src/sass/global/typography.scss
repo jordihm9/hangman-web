@@ -12,6 +12,10 @@ h3 {
 
 h1 {
 	font-size: 5rem;
+
+	@include breakpoint-down('small') {
+		font-size: 3.75rem;
+	}
 }
 
 button {

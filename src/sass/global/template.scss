@@ -9,6 +9,7 @@
 }
 
 body {
+	margin-bottom: 10vh;
 	color: $clr-white;
 	background: linear-gradient(180deg, #2B0C52 0%, #7C7484 100%);
 	background-repeat: no-repeat;
@@ -24,8 +25,12 @@ button:hover {
 }
 
 .title {
-	margin-top: 5rem;
+	margin: 5rem 0;
 	letter-spacing: .25em;
+
+	@include breakpoint-down('small') {
+		margin: 3.5vh 0 1rem 0;
+	}
 }
 
 .text-center {
