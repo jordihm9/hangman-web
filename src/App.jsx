@@ -6,6 +6,7 @@ import Button from './components/Button';
 import Hangman from './components/Hangman';
 import Keyboard from './components/Keyboard';
 import Guess from './components/Guess';
+import PopUp from './components/PopUp';
 
 const App = () => {
 	const [ word, setWord ] = useState(null);
@@ -39,19 +40,6 @@ const App = () => {
 			setState('HANGED');
 		}
 	}, [ failures ]);
-
-	useEffect(() => {
-		switch (state) {
-			case 'HANGED':
-				alert('hanged!');
-				break;
-			case 'GUESSED':
-				alert('guessed!');
-				break;
-			default:
-				return;
-		}
-	}, [ state ]);
 
 	/**
 	 * Updates the keys list setting it has been used
@@ -132,12 +120,13 @@ const App = () => {
 			<div className="title text-center">
 				<h1>Hangman</h1>
 			</div>
-			{ word && guess ?
+			{
+				word && guess ?
 					<Fragment>
 						<Hangman failures={failures}/>
 						<Guess guess={guess} />
 						<Keyboard keys={keys} guessLetter={guessLetter} />
-						<Button action={reset}>Reset</Button>
+						<Button action={reset}>New word</Button>
 					</Fragment>
 				: state === 'LOADING' ?
 					<h2>LOADING</h2>
@@ -145,10 +134,20 @@ const App = () => {
 			}
 			{
 				state === 'GUESSED' ?
-					<h2>GUESSED</h2>
-					: state === 'HANGED' ?
-					<h2>HANGED</h2>
-					: null
+						<PopUp
+							msg="You guessed it!"
+							word={word}
+							buttonText="Play again"
+							buttonAction={reset}
+						/>
+				: state === 'HANGED' ?
+						<PopUp
+							msg="You've been hanged!"
+							word={word}
+							buttonText="Play again"
+							buttonAction={reset}
+						/>
+				: null
 			}
 		</Fragment>
 	);

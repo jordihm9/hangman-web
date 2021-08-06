@@ -246,4 +246,39 @@ button:hover {
   background: #00AC92 !important;
 }
 
+.outer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #2B0C52;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+.popup {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  padding: 1.5rem 2.25rem;
+  background: #DDEAF2;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+}
+
+.popup > .content {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.popup > .content > .msg {
+  font-size: 2.5rem;
+}
+
+.popup > .content > .word {
+  font-size: 2rem;
+  color: #7C7484;
+}
+
 /*# sourceMappingURL=style.css.map */
