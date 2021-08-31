@@ -7,6 +7,7 @@ import Hangman from './components/Hangman';
 import Keyboard from './components/Keyboard';
 import Guess from './components/Guess';
 import PopUp from './components/PopUp';
+import Spinner from './components/Spinner';
 
 const App = () => {
 	const [ word, setWord ] = useState(null);
@@ -129,7 +130,7 @@ const App = () => {
 						<Button action={reset}>New word</Button>
 					</Fragment>
 				: state === 'LOADING' ?
-					<h2>LOADING</h2>
+					<Spinner />
 				: null
 			}
 			{

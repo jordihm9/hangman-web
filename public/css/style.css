@@ -299,5 +299,27 @@ button:hover {
     width: 90%;
   }
 }
+.spinner {
+  margin: 7.5rem auto 0 auto;
+  height: 3rem;
+  width: 3rem;
+  border: 0.35rem solid transparent;
+  border-top-color: #DDEAF2;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-timing-function: linear;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /*# sourceMappingURL=style.css.map */
