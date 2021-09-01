@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import getRandomWord from './services/getRandomWord';
 
@@ -23,8 +24,15 @@ const App = () => {
 
 	useEffect(() => {
 		if (word) {
-			setGuess([...word].fill(''));
-			setState('PLAYING');
+			setGuess(
+				[...word].reduce((acc, letter) => {
+					acc.push({
+						letter: '',
+						id: uuidv4()
+					});
+					return acc;
+				}, [])
+			);
 		}
 	}, [ word ]);
 	
@@ -69,7 +77,20 @@ const App = () => {
 		if (!word.includes(letter)) {
 			fail();
 		} else {
-			setGuess(guess.map((val, index) => letter === word[index] ? letter : val));
+			setGuess(
+				// guess.map((val, index) => letter === word[index] ? letter : val)
+				guess.reduce((acc, val, index) => {
+					if (letter === word[index]) {
+						acc.push({
+							...val,
+							letter: letter
+						});
+					} else {
+						acc.push(val);
+					}
+					return acc;
+				}, [])
+			);
 		}
 	}
 
@@ -112,6 +133,7 @@ const App = () => {
 
 		getRandomWord()
 			.then(newWord => {
+				setState('PLAYING');
 				setWord(newWord);
 			});
 	}
