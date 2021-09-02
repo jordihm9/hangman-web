@@ -33,6 +33,12 @@ const App = () => {
 					return acc;
 				}, [])
 			);
+
+			// always wait some miliseconds before changing the state back to PLAYING
+			// so the spinner shows up to let know the user the app is
+			// working to load a different word
+			// !! no more than 500ms because it would notice the app is too slow !!
+			setTimeout(() => setState('PLAYING'), 250);
 		}
 	}, [ word ]);
 	
@@ -62,15 +68,14 @@ const App = () => {
 
 		// update the keyboard
 		setKeys(keys.reduce((acc, l) => {
-			if (l.letter === letter) {
-				acc.push({
-					...l,
+			acc.push(
+				l.letter === letter ?
+				{ ...l,
 					'inWord': word.includes(letter),
 					'used': true
-				});
-			} else {
-				acc.push(l);
-			}
+				}
+				: l
+			);
 			return acc;
 		}, []));
 
@@ -79,16 +84,14 @@ const App = () => {
 			fail();
 		} else {
 			setGuess(
-				// guess.map((val, index) => letter === word[index] ? letter : val)
 				guess.reduce((acc, val, index) => {
-					if (letter === word[index]) {
-						acc.push({
-							...val,
-							letter: letter
-						});
-					} else {
-						acc.push(val);
-					}
+					acc.push(
+						letter === word[index] ?
+						{ ...val,
+							'letter': letter
+						}
+						: val
+					);
 					return acc;
 				}, [])
 			);
@@ -134,7 +137,6 @@ const App = () => {
 
 		getRandomWord()
 			.then(newWord => {
-				setState('PLAYING');
 				setWord(newWord);
 			});
 	}
@@ -145,33 +147,31 @@ const App = () => {
 				<h1>Hangman</h1>
 			</div>
 			{
-				word && guess ?
+				state === 'LOADING' ?
+					<Spinner />
+				: word && guess &&
 					<Fragment>
 						<Hangman failures={failures}/>
 						<Guess guess={guess} />
 						<Keyboard keys={keys} guessLetter={guessLetter} />
 						<Button action={reset}>New word</Button>
 					</Fragment>
-				: state === 'LOADING' ?
-					<Spinner />
-				: null
 			}
 			{
 				state === 'GUESSED' ?
-						<PopUp
-							msg="You guessed it!"
-							word={word}
-							buttonText="Play again"
-							buttonAction={reset}
-						/>
-				: state === 'HANGED' ?
-						<PopUp
-							msg="You've been hanged!"
-							word={word}
-							buttonText="Play again"
-							buttonAction={reset}
-						/>
-				: null
+					<PopUp
+						msg="You guessed it!"
+						word={word}
+						buttonText="Play again"
+						buttonAction={reset}
+					/>
+				: state === 'HANGED' &&
+					<PopUp
+						msg="You've been hanged!"
+						word={word}
+						buttonText="Play again"
+						buttonAction={reset}
+					/>
 			}
 		</Fragment>
 	);
