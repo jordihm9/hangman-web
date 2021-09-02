@@ -38,9 +38,10 @@ const App = () => {
 	
 	useEffect(() => {
 		if (word && guess) {
-			if (guess.join('') === word.join('')) {
-				setState('GUESSED');
-			}
+			const wordStr = word.join('');
+			const guessStr = guess.reduce((str, letter) => str += letter.letter, '');
+
+			setState(guessStr === wordStr ? 'GUESSED' : state);
 		}
 	}, [ guess ]); // eslint-disable-line
 
