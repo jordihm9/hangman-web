@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @use './../abstracts/' as *;
 
 #hangman {
@@ -57,7 +59,7 @@
 
 	&.head {
 		top: $rope-height - .05rem;
-		left: -($head-diameter / 2) + ($thickness / 2);
+		left: - math.div($head-diameter, 2) + math.div($thickness, 2);
 		width: $head-diameter;
 		height: $head-diameter;
 		border-radius: 50%;
@@ -73,8 +75,8 @@
 			position: absolute;
 			bottom: -$thickness;
 			border-top: $thickness solid rgba($clr-white, .2);
-			border-right: $thickness / 2 solid transparent;
-			border-left: $thickness / 2 solid transparent;
+			border-right: math.div($thickness, 2) solid transparent;
+			border-left: math.div($thickness, 2) solid transparent;
 			border-bottom: none;
 		}
 
@@ -84,7 +86,7 @@
 	}
 
 	&.arm {
-		top: $rope-height + $head-diameter + ($body-height / 4);
+		top: $rope-height + $head-diameter + math.div($body-height, 4);
 		height: $thickness;
 		width: $arm-width;
 

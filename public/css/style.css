@@ -38,7 +38,7 @@ button:hover {
 }
 
 * {
-  font-family: "Londrina Solid", cursive;
+  font-family: "Londrina Solid", "Helvetica", "Arial", sans-serif;
 }
 
 h1,
@@ -205,6 +205,14 @@ button:hover {
   width: 1em;
   height: 1.2em;
   font-size: 3rem;
+  transition: color 100ms ease;
+}
+
+.letter.appear {
+  animation-name: flash;
+  animation-timing-function: ease;
+  animation-duration: 750ms;
+  animation-iteration-count: 2;
 }
 
 .letter:after {
@@ -217,6 +225,14 @@ button:hover {
   background: #DDEAF2;
 }
 
+@keyframes flash {
+  from {
+    color: transparent;
+  }
+  to {
+    color: inherit;
+  }
+}
 .keyboard {
   margin: 2.5rem auto;
   padding: 0 1.25em;

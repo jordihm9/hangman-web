@@ -18,6 +18,14 @@
 	width: 1em;
 	height: 1.2em;
 	font-size: 3rem;
+	transition: color 100ms ease;
+
+	&.appear {
+		animation-name: flash;
+		animation-timing-function: ease;
+		animation-duration: 750ms;
+		animation-iteration-count: 2;
+	}
 
 	&:after {
 		content: '';
@@ -27,5 +35,14 @@
 		left: 0;
 		height: .1em;
 		background: $clr-white;
+	}
+}
+
+@keyframes flash {
+	from {
+		color: transparent;
+	}
+	to {
+		color: inherit;
 	}
 }
