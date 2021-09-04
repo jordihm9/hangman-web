@@ -23,9 +23,9 @@ const Key = ({ letter, guessLetter }) => {
 	}
 
 	return (
-		<div className={setClasses()} onClick={clickHandler}>
+		<button className={setClasses()} onClick={clickHandler}>
 			{letter.letter}
-		</div>
+		</button>
 	);
 }
 

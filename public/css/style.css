@@ -70,6 +70,15 @@ a:active {
 }
 
 button {
+  background: inherit;
+  color: inherit;
+}
+
+button:focus {
+  box-shadow: 0 0 0.1em 0.15em rgba(221, 234, 242, 0.5);
+}
+
+.btn {
   display: block;
   margin: auto;
   padding: 0.5em 1.15em;
@@ -79,8 +88,13 @@ button {
   transition: background 250ms ease;
 }
 
-button:hover {
+.btn:hover {
   background: linear-gradient(265.53deg, rgba(43, 12, 82, 0.75) -0.79%, rgba(105, 46, 164, 0.75) 96.93%);
+}
+
+.btn:focus {
+  background-color: inherit;
+  box-shadow: 0 0 1rem 0.15rem rgba(221, 234, 242, 0.25);
 }
 
 #hangman {
