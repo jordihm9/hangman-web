@@ -11,7 +11,7 @@ const PopUp = ({ msg, word, buttonText, buttonAction }) => {
 					<div className="word">{word}</div>
 				</div>
 			<div className="button__container">
-				<Button action={buttonAction}>{buttonText}</Button>
+				<Button tabIndex="1" action={buttonAction}>{buttonText}</Button>
 			</div>
 			</div>
 		</div>

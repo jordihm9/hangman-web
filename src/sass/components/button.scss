@@ -1,6 +1,15 @@
 @use './../abstracts/' as *;
 
 button {
+	background: inherit;
+	color: inherit;
+
+	&:focus {
+		box-shadow: 0 0 .1em .15em rgba($clr-white, .5);
+	}
+}
+
+.btn {
 	display: block;
 	margin: auto;
 	padding: .5em 1.15em;
@@ -11,5 +20,10 @@ button {
 	
 	&:hover {
 		background: linear-gradient(265.53deg, rgba($clr-purple, .75) -0.79%, rgba($clr-bright-purple, 0.75) 96.93%);
+	}
+
+	&:focus {
+		background-color: inherit;
+		box-shadow: 0 0 1rem .15rem rgba($clr-white, .25);
 	}
 }
