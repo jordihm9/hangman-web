@@ -20,10 +20,19 @@ const App = () => {
 	 } = HangmanGame();
 
 	function keypressHandler(ev) {
+		const key = ev.key.toUpperCase();
 		const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-		if (alphabet.includes(ev.key.toUpperCase())) {
-			guessLetter(ev.key.toUpperCase());
+		if (alphabet.includes(key)) {
+			for (let i = 0; i < keys.length; i++) {
+				const k = keys[i];
+				if (k.letter === key) {
+					if (!k.used) {
+						guessLetter(key);
+					}
+					break;
+				}
+			}
 		}
 	}
 
