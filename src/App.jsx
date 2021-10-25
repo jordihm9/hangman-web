@@ -9,11 +9,24 @@ import Guess from './components/Guess';
 import PopUp from './components/PopUp';
 import Spinner from './components/Spinner';
 
+import useEvent from './hooks/useEvent';
+
 const App = () => {
+	useEvent('keydown', keypressHandler);
+
 	const {
 		word, guess, failures, keys, state,
 		guessLetter, reset
 	 } = HangmanGame();
+
+	function keypressHandler(ev) {
+		console.log(ev);
+		const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+		if (alphabet.includes(ev.key.toUpperCase())) {
+			guessLetter(ev.key.toUpperCase());
+		}
+	}
 
 	return (
 		<Fragment>
