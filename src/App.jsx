@@ -20,7 +20,6 @@ const App = () => {
 	 } = HangmanGame();
 
 	function keypressHandler(ev) {
-		console.log(ev);
 		const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 		if (alphabet.includes(ev.key.toUpperCase())) {
