@@ -1,25 +1,24 @@
+const API_BASE_URL = 'https://api.wordnik.com/v4/words.json';
+
+const API_KEY = process.env.REACT_APP_WORDNIK_API_KEY;
+
 /**
- * Send a request to https://random-words-api.herokuapp.com/w?n=1 via **GET**
- * API: https://random-words-api.herokuapp.com
+ * Send a request to wordnik API via **GET**
  * headers: content-type = 'application/json'
- * @return {array} new word in uppercase splited by letters
+ * @return string new word in uppercase splited by letters
  */
-async function getRandomWord() {
-	let word;
-	const API_URL = 'https://random-words-api.herokuapp.com/w?n=1';
+export const getRandomWord = async () => {
+	const randomWordUrl = `${API_BASE_URL}/randomWord?${apiKey()}`
 
-	const OPTIONS = {
-		'headers': {
-			'Content-Type': 'application/json'
-		}
+	try {
+		const response = await fetch (randomWordUrl).then(res => res.json());
+		// response: { id: number, word: string }
+		return response.word.toUpperCase().split('');
+	} catch(err) {
+		return null;
 	}
-
-	await fetch (API_URL, OPTIONS)
-		.then(response => response.json()) // getting the response as json
-		.then(words => word = words[0].toUpperCase().split(''))
-		.catch(err => word = null);
-
-	return word;
 }
 
-export default getRandomWord;
+const apiKey = () => {
+	return `api_key=${API_KEY}`;
+}
